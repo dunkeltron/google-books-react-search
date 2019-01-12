@@ -1,11 +1,14 @@
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
 
 var BookSchema = new Schema({
     title: {
         type: String,
         required: true
+    },
+    
+    subtitle: { 
+        type: String 
     },
     authors: {
         type: [String],
@@ -22,11 +25,15 @@ var BookSchema = new Schema({
     link: {
         type: String,
         required: true
+    },    
+    googleId: { 
+      type: String, 
+      required: true, 
+      unique: true 
     }
-
 
 });
 
-var Book = mongoose.model("Book", BookSchema);
+const Book = mongoose.model("Book", BookSchema);
 
 module.exports = Book;

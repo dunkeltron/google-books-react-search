@@ -1,33 +1,15 @@
-const db = require("../../models");
 const router = require("express").Router();
+const bookController = require("../../controllers/bookController");
 
-    router.get("/books", function (req, res) {
-        db.Books.find({})
-            .then(function (books) {
-                res.json(books);
-            })
-            .catch(function (err){
-                res.status(422).json(err);
-            })
-    });
+    // Matches with "/api/books"
+router.route("/")
+    .get(bookController.findAll)
+    .post(bookController.create);
 
-    router.post("/books", function (req, res) {
-        db.Books.create(req.body)
-            .then(function (dbBooks) {
-                res.json(dbBooks);
-            })
-            .catch(function (err) {
-                res.status(422).json(err);
-            })
-    });
-
-    router.delete("/books/:id", function (req, res) {
-        db.Books.findByIdAndRemove(req.params.id)
-        .then(dbBook => {
-            console.log("Book Removed");
-            res.json(dbBook);
-        }) 
-        .catch( err => res.status(422).json(err))
-    });
+// Matches with "/api/books/:id"
+router.route("/:id")
+    .get(bookController.findById)
+    .put(bookController.update)
+    .delete(bookController.remove);
     
 module.exports = router;
