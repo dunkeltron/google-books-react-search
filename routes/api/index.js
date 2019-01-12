@@ -6,13 +6,13 @@ const apiRoutes = require("./books");
 
 //connect the other routes to this file
 //routes to interact with google
-router.use("/api/google", googleRoutes);
+router.use("/google", googleRoutes);
 //rotues to interact with our database
-router.use("/api/user", apiRoutes)
+router.use("/books", apiRoutes)
 
 // render the html page if the route is not previously defined
-router.get("*", (req, res) => {
+router.use(function(req, res) {
     res.sendFile(path.join(__dirname, "../../client/public/index.html"));
-});
+  });
 
 module.exports = router;

@@ -6,7 +6,7 @@ import Book from "../components/Book";
 import Footer from "../components/Footer";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { List } from "../components/List";
+import  {List}  from "../components/List";
 
 class Home extends Component {
   state = {
@@ -44,7 +44,7 @@ class Home extends Component {
 
   handleBookSave = id => {
     const book = this.state.books.find(book => book.id === id);
-
+    console.log(id);
     API.saveBook({
       googleId: book.id,
       title: book.volumeInfo.title,
